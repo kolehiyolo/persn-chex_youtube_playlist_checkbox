@@ -1,3 +1,5 @@
-1. I've now studied the code GPT-kun gave me and while I now have a pretty elaborate understanding of how it all works and connects, I think confirming and doing a comprehensive back-and-forth with GPT-kun is necessary to confirm my understanding and to squash any unknowns, which there are a lot of
-2. Next step is to check each file with GPT-kun, how I understood it, and then update the comments I have on each file accordingly
-  2.1. I might even update the code as I understand them better, to better fit my style of writing, such as naming conventions and compartmentalization
+1. With my understanding of the codebase pretty robust already, the next step is to actually revisit the code and make it all work
+2. Right now, Chrome throws some errors about the extension that apparently prevents it from even being used by the user
+3. I'll check those, but most importantly, just turn off first some parts of the extension that I know for a fact are just gonna bog down my process
+4. First thing is I need to at the very least have the extension be "working" for the user, even if it doesn't actually do the API calls yet
+5. My thinking is, at least for now, I want the popup to actually show, then take it from there
