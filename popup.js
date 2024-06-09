@@ -1,3 +1,5 @@
+console.log('Loaded popup.js');
+
 // Adding event listener to #move-to-playlist button in popup.html
 document
   .getElementById('move-to-playlist')
@@ -12,28 +14,31 @@ document
           currentWindow: true
         }, 
         (tabs) => {
-          chrome.tabs.sendMessage(
-            // Performs .sendMessage() for only the first tab within all active tabs, esp if there are many active tabs
-            tabs[0].id, 
-            {
-              // getSelectedVideos is done by content.js
-              action: 'getSelectedVideos'
-            }, 
-            // Once content.js processes getSelectedVideos, whatever the response is is fetched
-            (response) => {
-              // .sendMessage() is performed, passing the action 'moveToPlaylist' specific to this button and also the the array fetched from content.js, then triggering background.js > chrome.runtime.onMessage
-              chrome.runtime.sendMessage(
-                {
-                  action: 'moveToPlaylist',
-                  videoIds: response
-                }, 
-                (res) => {
-                  // background.js does it's thing, which culminates in this final message, with res either being "success" or "error"
-                  console.log('Move to Playlist Response:', res);
-                }
-              );
-            }
-          );
+          console.log(tabs[0].id);
+          document.getElementById('active-tab-data')
+            .innerHTML = JSON.stringify(tabs[0].title);
+          // chrome.tabs.sendMessage(
+          //   // Performs .sendMessage() for only the first tab within all active tabs, esp if there are many active tabs
+          //   tabs[0].id, 
+          //   {
+          //     // getSelectedVideos is done by content.js
+          //     action: 'getSelectedVideos'
+          //   }, 
+          //   // Once content.js processes getSelectedVideos, whatever the response is is fetched
+          //   (response) => {
+          //     // .sendMessage() is performed, passing the action 'moveToPlaylist' specific to this button and also the the array fetched from content.js, then triggering background.js > chrome.runtime.onMessage
+          //     chrome.runtime.sendMessage(
+          //       {
+          //         action: 'moveToPlaylist',
+          //         videoIds: response
+          //       }, 
+          //       (res) => {
+          //         // background.js does it's thing, which culminates in this final message, with res either being "success" or "error"
+          //         console.log('Move to Playlist Response:', res);
+          //       }
+          //     );
+          //   }
+          // );
         }
       );
     }
@@ -53,23 +58,26 @@ document
           currentWindow: true
         },
         (tabs) => {
-          chrome.tabs.sendMessage(
-            tabs[0].id,
-            {
-              action: 'getSelectedVideos'
-            },
-            (response) => {
-              chrome.runtime.sendMessage(
-                {
-                  action: 'removeFromWatchLater',
-                  videoIds: response
-                },
-                (res) => {
-                  console.log('Remove from Watch Later Response:', res);
-                }
-              );
-            }
-          );
+          console.log(tabs[0].id);
+          document.getElementById('active-tab-data')
+            .innerHTML = JSON.stringify(tabs[0].title);
+          // chrome.tabs.sendMessage(
+          //   tabs[0].id,
+          //   {
+          //     action: 'getSelectedVideos'
+          //   },
+          //   (response) => {
+          //     chrome.runtime.sendMessage(
+          //       {
+          //         action: 'removeFromWatchLater',
+          //         videoIds: response
+          //       },
+          //       (res) => {
+          //         console.log('Remove from Watch Later Response:', res);
+          //       }
+          //     );
+          //   }
+          // );
         }
       );
     }
