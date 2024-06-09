@@ -1,7 +1,0 @@
-1. Files created as per ChatGPT-kun's suggestions
-2. Also filled in the manifest.json file, edited the name and description properties
-3. This is gonna be my first Chrome Extension project, and I realize there are multitudes of ways of doing this functionality
-  3.1. One such way is creating a JavaScript script to run within Chrome Developer tools to add a checkbox to the DOM and then automate the tedious clicks needed to move the video between playlists, so basically just having the script do the manual thing within the page's loaded UI
-  3.2. Another method, which is still kinda vague within my head but shows a lot of promise, is to access the YouTube API, play with it using Python or JavaScript, maybe exporting my playlist onto a spreadsheet, and then I have a column as a checkbox, AND THEN my Python/JS script will update the data within YouTube's db according to the spreadsheet with the API, but again this is kinda vague and an idea I haven't explore much, just something I'm considering after learning that YouTube has an API for playlists
-  3.3. Whatever the case, the extension idea (I THINK) has the most versatility and the most efficient UX, as it's basically just gonna be embedded onto my browser, and anytime I have the need for the functionality, there won't be any freaking extra buttons I have to click and scripts to run and other crap I have to do to make it work
-4. Into the rabbit hole we go
