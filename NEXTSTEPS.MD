@@ -1,0 +1,3 @@
+1. I've now studied the code GPT-kun gave me and while I now have a pretty elaborate understanding of how it all works and connects, I think confirming and doing a comprehensive back-and-forth with GPT-kun is necessary to confirm my understanding and to squash any unknowns, which there are a lot of
+2. Next step is to check each file with GPT-kun, how I understood it, and then update the comments I have on each file accordingly
+  2.1. I might even update the code as I understand them better, to better fit my style of writing, such as naming conventions and compartmentalization

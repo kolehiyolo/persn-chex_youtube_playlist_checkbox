@@ -1,4 +1,4 @@
-Studied GPT code (Part 1)
+Studied GPT code (Part 1 & 2)
 
 1. manifest.json
   1.1. So basically this file is the meta data dump for how chrome will display the extension data to the user AND also what files have to be accessed by chrome to do stuff with
@@ -22,3 +22,20 @@ Studied GPT code (Part 1)
       3.2.3.4. This chunk is where I'm getting kinda lost, primarily because I'm not familiar with the YouTube API just yet, so I don't know what kinda prep you have to do for the API calls, such as token, the header and body formats, and of course, the endpoint options and who much power we have over our data
   3.3. I've sorta included some very generalized comments on the parts that I sorta understand and will just revisit it after
   3.4. Oh and I also refactored the code a bit to "fix" the nesting according to my weird anal tendencies
+4. popup.js
+  4.1. Rather straightforward but did require some cross-file checking of methods
+  4.2. Basically, it has 2 script chunks, each just adding a click-based event listener to the 2 buttons in popup.html
+  4.3. Each script simply says that when the button is clicked, check the active tabs in the current active Chrome window, select just the first one in case there are multiple active tabs, then perform the "getSelectedVideos" action referred to in content.js
+    4.3.1. I have not done content.js yet but I did peruse it quickly just to confirm if getSelectedVideos is referred to there
+  4.4. Then, once content.js is done doing it's thang, the response should be an array of all videos that are selected in the page, which is then passed along via chrome.runtime.sendMessage to background.js along with the fact that it's a moveToPlaylist request
+  4.5. background.js then detects this via the chrome.runtime.onMessage event listener, activating the respective script which primarily triggers handleApiRequest() function, going through the array of videoIds, preparing requests for each, then sending the API calls per
+  4.6. Finally, depending on the outcome of each call, a message is sent all the way up to the popup.js chrome.runtime.sendMessage() method that tripped background.js in the first place, with either "success" or "error"
+  4.7. The same exact process is done for each of the 2 event listeners, just that they of course have different action values as one moves videos to another playlist, while another removes them from watch later
+    4.7.1. This will defo have to be revisited as I'm hoping to make this entire functionality flexible, allowing copying of videos to playlists, removing videos from specific playlists, and moving videos to and from playlists (which is effectively just copying videos to a different playlist AND THEN removing them from their original playlist)
+5. content.js
+  5.1. Alright, so this is the final relevant piece of the puzzle as far as I can tell
+  5.2. This seems to be the script in charge of creating the checkboxes, tracking them, and then preparing and sending videoIds[]
+  5.3. On page load, the script finds all video elements then adds the checkboxes per
+  5.4. It then has an event listener set tracking all changes within the page, and if a change is related to any of the added checkboxes, it gets the ID of the video corresponding the checkbox that tripped the change, and then updates an array selectedVideos[] accordingly (whether a tick or untick is done for the video)
+  5.5. Finally, another listener is set that basically waits for any chrome.runtime.onMessage events, specifically the "getSelectedVideos" action in our case, which simply gets the current selectedVideos[] arrayy and sends it as a response to the requestor
+  5.6. What I'm sort of unclear with is why background.js, popup.js, and content.js are compartmentalized as they are, and why specific functionalities go where
