@@ -17,28 +17,31 @@ document
           console.log(tabs[0].id);
           document.getElementById('active-tab-data')
             .innerHTML = JSON.stringify(tabs[0].title);
-          // chrome.tabs.sendMessage(
-          //   // Performs .sendMessage() for only the first tab within all active tabs, esp if there are many active tabs
-          //   tabs[0].id, 
-          //   {
-          //     // getSelectedVideos is done by content.js
-          //     action: 'getSelectedVideos'
-          //   }, 
-          //   // Once content.js processes getSelectedVideos, whatever the response is is fetched
-          //   (response) => {
-          //     // .sendMessage() is performed, passing the action 'moveToPlaylist' specific to this button and also the the array fetched from content.js, then triggering background.js > chrome.runtime.onMessage
-          //     chrome.runtime.sendMessage(
-          //       {
-          //         action: 'moveToPlaylist',
-          //         videoIds: response
-          //       }, 
-          //       (res) => {
-          //         // background.js does it's thing, which culminates in this final message, with res either being "success" or "error"
-          //         console.log('Move to Playlist Response:', res);
-          //       }
-          //     );
-          //   }
-          // );
+          chrome.tabs.sendMessage(
+            // Performs .sendMessage() for only the first tab within all active tabs, esp if there are many active tabs
+            tabs[0].id, 
+            {
+              // getSelectedVideos is done by content.js
+              action: 'getSelectedVideos'
+            }, 
+            // Once content.js processes getSelectedVideos, whatever the response is is fetched
+            (response) => {
+              document.getElementById('selected-videos-data')
+                .innerHTML = JSON.stringify(response.selectedVideosTitles);
+
+              // // .sendMessage() is performed, passing the action 'moveToPlaylist' specific to this button and also the the array fetched from content.js, then triggering background.js > chrome.runtime.onMessage
+              // chrome.runtime.sendMessage(
+              //   {
+              //     action: 'moveToPlaylist',
+              //     videoIds: response
+              //   }, 
+              //   (res) => {
+              //     // background.js does it's thing, which culminates in this final message, with res either being "success" or "error"
+              //     console.log('Move to Playlist Response:', res);
+              //   }
+              // );
+            }
+          );
         }
       );
     }

@@ -42,8 +42,7 @@ window.addEventListener(
 // AFAICT, this is the array that actually contains the list of video IDs, to be updated and called upon as user interactions happen
 // ? A Set is used to keep track of the IDs of the selected videos. Sets are chosen here because they automatically handle uniqueness and provide efficient operations for adding, deleting, and checking items.
 const selectedVideosIDs = new Set();
-
-const selectedVideosTitles = new Set();
+const selectedVideosTitles = new Map();
 
 // I'm guessing this tracks the checkbox changes within the page, which then effectively adds or removes each item accordingly within selectedVideos[]
 document.addEventListener(
@@ -76,29 +75,35 @@ document.addEventListener(
 
       console.log(videoID);
       console.log(videoTitle);
-        
+
       // Updating selectedVideosIDs[] according to the change (tick or untick)
       if (event.target.checked) {
         selectedVideosIDs.add(videoID);
-        selectedVideosTitles.add(videoTitle);
+        selectedVideosTitles.set(videoID, videoTitle)
       } else {
         selectedVideosIDs.delete(videoID);
-        selectedVideosTitles.delete(videoTitle);
+        selectedVideosTitles.delete(videoID);
       }
+
+      console.clear();
+      console.log(selectedVideosIDs);
+      console.log(selectedVideosTitles);
     }
   }
 );
 
-// ! CLOSED
-// // When popup.js > chrome.tabs.sendMessage() happens, this is what handles that request, basically sending selectedVideos[]
-// // ? Listens for messages from the extension's other parts (like popup.js).
-// chrome.runtime.onMessage.addListener(
-//   (request, sender, sendResponse) => {
-//     // AFAICT, this event listener checks for all kinds of requests from all kinds of places (most probably from popup.js), but in our case, just the getSelectedVideos is needed
-//     if (request.action === 'selectedVideosIDs') {
-//       sendResponse(
-//         Array.from(selectedVideosIDs)
-//       );
-//     }
-//   }
-// );
+// When popup.js > chrome.tabs.sendMessage() happens, this is what handles that request, basically sending selectedVideos[]
+// ? Listens for messages from the extension's other parts (like popup.js).
+chrome.runtime.onMessage.addListener(
+  (request, sender, sendResponse) => {
+    // AFAICT, this event listener checks for all kinds of requests from all kinds of places (most probably from popup.js), but in our case, just the getSelectedVideos is needed
+    if (request.action === 'getSelectedVideos') {
+      sendResponse(
+        {
+          selectedVideosIDs: Array.from(selectedVideosIDs),
+          selectedVideosTitles:Array.from(selectedVideosTitles)
+        }
+      );
+    }
+  }
+);

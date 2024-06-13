@@ -1,7 +1,6 @@
-Video IDs and Video Title fetching
+Arrays working now
 
-1. We can now fetch the video title and ID as needed
-2. The challenge was finding the right element to get the data from, ensuring especially that it is present in all video elements
-3. The true challenge, however, was creating the correct script to actually fetch the needed data, as I sorta probably forgot how DOM fetching works in JavaScript
-  3.1. I've been doing mostly Python DOM fetching so yeah
-4. I am able to add video ID and video Title to the corresponding arrays, but I want selectedVideoTitles[] data to be objects, as described in the previous commit
+1. selectedVideosIDs[] and selectedVideosTitles[] now working splendidly
+2. They're being logged and even being printed on popup.html
+3. For selectedVideosTitles[], though, I had to revamp it to be a map instead of a set so that adding and deleting items are a breeze
+4. The .onMessage() method for content.js also is working splendidly now, as it is now capable of waiting for any popup.js requests for the data and responding as intended 

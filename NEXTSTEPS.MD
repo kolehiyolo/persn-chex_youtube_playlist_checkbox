@@ -1,3 +1,4 @@
-1. Next step is making the data added to selectedVideosTitles[] objects of {id: id, title:title} format
-  1.1. This way, we can delete them from the array easier by simply finding the ID, which is a better idea than just deleting by title because perhaps YouTube video titles aren't necessarily unique
-2. Then the next step after that is testing the values of selectedVideosIDs[] and selectedVideosTitles[], either by printing within popup.html, or by console.log, or both lol
+1. The next step now is definitely the hardest by far, and that is interacting with the YouTube API
+2. I'm thinking to start with, the extension has to fetch the user's playlist data, ideally even just the playlist titles and IDs (I'm assuming they have IDs)
+3. Why we need them is so that we can add them as a selection on the popup, which then the user can choose from as the destination for copying or moving the selected videos
+4. Onto the rabbit hole we go
