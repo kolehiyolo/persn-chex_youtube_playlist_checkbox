@@ -1,9 +1,7 @@
-Checkbox rendering working
+Video IDs and Video Title fetching
 
-1. Yo so going back to the last commit, it was a PAUSE since I didn't have time to properly close the commit and put details in
-2. So at the very least, as planned, the checkbox rendering is now working
-3. It's even detecting when page mutations happen, namely when the page loads more new video items as you scroll down, and then adding checkboxes to those new videos
-4. I was trying to figure out how to get the video IDs to add to selectedVideosIDs[] and even wanted to try getting selectedVideosTitles[], which now I'm thinking should be an array of objects
-  4.1. selectedVideosTitles[] should have { id: id, title: title}, so we can easily manipulate which title we need based on ID
-5. I was, however, interrupted by an IRL thing and had to pause the process
-  5.1. I was in the midst of studying a sample video element HTML to check how I can get the ID and the title
+1. We can now fetch the video title and ID as needed
+2. The challenge was finding the right element to get the data from, ensuring especially that it is present in all video elements
+3. The true challenge, however, was creating the correct script to actually fetch the needed data, as I sorta probably forgot how DOM fetching works in JavaScript
+  3.1. I've been doing mostly Python DOM fetching so yeah
+4. I am able to add video ID and video Title to the corresponding arrays, but I want selectedVideoTitles[] data to be objects, as described in the previous commit

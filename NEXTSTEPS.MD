@@ -1,2 +1,3 @@
-1. The next step now is to figure out how to get the IDs and the titles, and then adjust selectedVideosIDs[] and selectedVideosTitles[]
-2. To test that they're working, too, I will also have popup.html updated when either buttons are clicked
+1. Next step is making the data added to selectedVideosTitles[] objects of {id: id, title:title} format
+  1.1. This way, we can delete them from the array easier by simply finding the ID, which is a better idea than just deleting by title because perhaps YouTube video titles aren't necessarily unique
+2. Then the next step after that is testing the values of selectedVideosIDs[] and selectedVideosTitles[], either by printing within popup.html, or by console.log, or both lol
