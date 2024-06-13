@@ -1,2 +1,2 @@
-1. The next step now is kinda big, but basically, we need to now make content.js work
-2. At the very least, I want it to actually render the checkboxes for each video item, and then go from there
+1. The next step now is to figure out how to get the IDs and the titles, and then adjust selectedVideosIDs[] and selectedVideosTitles[]
+2. To test that they're working, too, I will also have popup.html updated when either buttons are clicked

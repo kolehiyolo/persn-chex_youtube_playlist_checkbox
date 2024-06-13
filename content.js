@@ -45,37 +45,37 @@ const selectedVideosIDs = new Set();
 
 const selectedVideosTitles = new Set();
 
-// I'm guessing this tracks the checkbox changes within the page, which then effectively adds or removes each item accordingly within selectedVideos[]
-document.addEventListener(
-  'change',
-  (event) => {
-    // Just a gate checker to see if the change was related to any of the .select-video-checkbox elements added above
-    if (
-      event.target.classList.contains('select-video-checkbox')
-    ) {
-      // Getting the ID of the video related to the change
-      // ? When a checkbox is checked or unchecked, it identifies the closest video element and gets its video ID (assumed to be stored in a data attribute of the video element).
-      const videoId = 
-        event.target
-        .closest('ytd-playlist-video-renderer')
-        .getElementById('meta')
-        .getElementById('video-title').href;
+// // I'm guessing this tracks the checkbox changes within the page, which then effectively adds or removes each item accordingly within selectedVideos[]
+// document.addEventListener(
+//   'change',
+//   (event) => {
+//     // Just a gate checker to see if the change was related to any of the .select-video-checkbox elements added above
+//     if (
+//       event.target.classList.contains('select-video-checkbox')
+//     ) {
+//       // Getting the ID of the video related to the change
+//       // ? When a checkbox is checked or unchecked, it identifies the closest video element and gets its video ID (assumed to be stored in a data attribute of the video element).
+//       const videoId = 
+//         event.target
+//         .closest('ytd-playlist-video-renderer')
+//         .getElementById('meta')
+//         .getElementById('video-title').href;
       
-      // const videoId = 
-      //   event.target
-      //   .closest('ytd-playlist-video-renderer').dataset.videoId;
+//       // const videoId = 
+//       //   event.target
+//       //   .closest('ytd-playlist-video-renderer').dataset.videoId;
 
-      console.log(videoId);
+//       console.log(videoId);
         
-      // Updating selectedVideosIDs[] according to the change (tick or untick)
-      if (event.target.checked) {
-        selectedVideosIDs.add(videoId);
-      } else {
-        selectedVideosIDs.delete(videoId);
-      }
-    }
-  }
-);
+//       // Updating selectedVideosIDs[] according to the change (tick or untick)
+//       if (event.target.checked) {
+//         selectedVideosIDs.add(videoId);
+//       } else {
+//         selectedVideosIDs.delete(videoId);
+//       }
+//     }
+//   }
+// );
 
 // ! CLOSED
 // // When popup.js > chrome.tabs.sendMessage() happens, this is what handles that request, basically sending selectedVideos[]
